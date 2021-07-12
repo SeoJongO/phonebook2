@@ -104,8 +104,9 @@ public class PhoneController extends HttpServlet {
 		// 삭제	
 		} else if("delete".equals(action)) {
 			System.out.println("[삭제]");
-			int personID = Integer.parseInt(request.getParameter("id"));
 			
+			int personID = Integer.parseInt(request.getParameter("id"));
+		
 			int count = phoneDao.personDelete(personID);
 			
 			if(count>0) {
@@ -119,6 +120,8 @@ public class PhoneController extends HttpServlet {
 		// 재입력
 		} else {
 			System.out.println("재입력");
+			
+			response.sendRedirect("/phonebook2/pbc?action=list");
 		}
 		
 	}
