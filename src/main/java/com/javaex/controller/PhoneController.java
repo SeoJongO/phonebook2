@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.javaex.dao.PhoneDao;
+import com.javaex.util.WebUtil;
 import com.javaex.vo.PersonVo;
 
 @WebServlet("/pbc")
@@ -30,7 +31,6 @@ public class PhoneController extends HttpServlet {
 			
 			//리스트
 			List<PersonVo> personList = phoneDao.getPersonList();
-			
 //			for(int i=0; i<personList.size(); i++) {
 //				System.out.println(personList.get(i));
 //			}
@@ -41,15 +41,19 @@ public class PhoneController extends HttpServlet {
 //			request.setAttribute("name", "황일영");
 			
 			//html작업 -> jsp에게 시킴(forward)
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/list.jsp");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/list.jsp");
+//			rd.forward(request, response);
+			
+			WebUtil.forward(request, response, "/WEB-INF/list.jsp");
 			
 		// 등록폼
 		} else if("wForm".equals(action)) {
 			System.out.println("[등록폼]");
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/writeForm.jsp");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/writeForm.jsp");
+//			rd.forward(request, response);
+			
+			WebUtil.forward(request, response, "/WEB-INF/writeForm.jsp");
 			
 		// 등록
 		} else if("insert".equals(action) ) {
@@ -70,7 +74,9 @@ public class PhoneController extends HttpServlet {
 				System.out.println("등록 실패");
 			}
 			
-			response.sendRedirect("/phonebook2/pbc?action=list");
+//			response.sendRedirect("/phonebook2/pbc?action=list");
+			
+			WebUtil.redirect(request, response,"/phonebook2/pbc?action=list");
 			
 		// 수정폼	
 		} else if("uForm".equals(action)) {
@@ -84,6 +90,8 @@ public class PhoneController extends HttpServlet {
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/updateForm.jsp");
 			rd.forward(request, response);
+			
+			WebUtil.forward(request, response, "/WEB-INF/updateForm.jsp");
 			
 		// 수정
 		} else if("update".equals(action)) {
@@ -105,7 +113,9 @@ public class PhoneController extends HttpServlet {
 				System.out.println("수정 실패");
 			}
 			
-			response.sendRedirect("/phonebook2/pbc?action=list");
+//			response.sendRedirect("/phonebook2/pbc?action=list");
+			
+			WebUtil.redirect(request, response, "/phonebook2/pbc?action=list");
 		
 		// 삭제	
 		} else if("delete".equals(action)) {
@@ -121,13 +131,17 @@ public class PhoneController extends HttpServlet {
 				System.out.println("삭제 실패");
 			}
 			
-			response.sendRedirect("/phonebook2/pbc?action=list");
+//			response.sendRedirect("/phonebook2/pbc?action=list");
+			
+			WebUtil.redirect(request, response, "/phonebook2/pbc?action=list");
 		
 		// 재입력
 		} else {
 			System.out.println("재입력");
 			
-			response.sendRedirect("/phonebook2/pbc?action=list");
+//			response.sendRedirect("/phonebook2/pbc?action=list");
+			
+			WebUtil.redirect(request, response, "/phonebook2/pbc?action=list");
 		}
 		
 	}
