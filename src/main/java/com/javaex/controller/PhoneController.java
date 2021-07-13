@@ -76,6 +76,12 @@ public class PhoneController extends HttpServlet {
 		} else if("uForm".equals(action)) {
 			System.out.println("[수정폼]");
 			
+			int id = Integer.parseInt(request.getParameter("id"));
+			
+			PersonVo getPerson = phoneDao.getPerson(id);
+			
+			request.setAttribute("gPerson", getPerson);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/updateForm.jsp");
 			rd.forward(request, response);
 			
